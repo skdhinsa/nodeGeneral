@@ -4,18 +4,18 @@
 const http = require('http');
 const fs = require('fs');
 
-// https://stackoverflow.com/questions/22213980/could-someone-explain-what-process-argv-means-in-node-js-please
-// ^ to understand process.argv (basically reads command in terminal, takes it as array)
 if (process.argv.length !== 3) {
     console.log('file path required');
     process.exit(1);
 }
 
 const filepath = process.argv[2];
+// const filepath = './files/some.txt'
+var readStream = fs.createReadStream(filepath, { encoding: 'utf8' })
 
-var readStream = fs.createReadStream(filepath)
-
+// listening to data event - everytime we get a buffer of data from stream
+// 2nd arg: callback func for that chunk of data
 readStream.on('data', (chunk) => {
-    console.log('------');
-    console.log(chunk.toString());
+    console.log('--- NEW CHUNK---');
+    console.log(chunk);
 });

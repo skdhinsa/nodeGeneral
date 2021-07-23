@@ -7,10 +7,10 @@ var server = http.createServer(function (req, res) {
     // when we make a req to server, write header on respond obj
     if (req.url === '/' || req.url === '/home') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        fs.createReadStream(__dirname + '/index.html').pipe(res)
+        fs.createReadStream(__dirname + '/index.html').pipe(res);
     } else if (req.url === '/contact') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        fs.createReadStream(__dirname + '/contact.html').pipe(res)
+        fs.createReadStream(__dirname + '/contact.html').pipe(res);
     } else if (req.url === '/api/books') {
         // send this object as json - JSON.stringify()
         var books = [
@@ -20,6 +20,9 @@ var server = http.createServer(function (req, res) {
         ]
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(books)) // .end expects buffer or string
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/html' });
+        fs.createReadStream(__dirname + '/404.html').pipe(res);
     }
 });
 

@@ -11,6 +11,15 @@ var server = http.createServer(function (req, res) {
     } else if (req.url === '/contact') {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         fs.createReadStream(__dirname + '/contact.html').pipe(res)
+    } else if (req.url === '/api/books') {
+        // send this object as json - JSON.stringify()
+        var books = [
+            { title: "Kafka on the Shore", author: 'Haruki Murakami' },
+            { title: "Sapiens", author: 'Yuval Noah Harari' },
+            { title: "Born a Crime", author: "Trevor Noah" }
+        ]
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(books)) // .end expects buffer or string
     }
 });
 

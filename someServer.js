@@ -11,7 +11,7 @@ var server = http.createServer((req, res) => {
         return res.end('must be POST\n');
     }
 
-    req.pipe(map(chunk => {
+    req.pipe(map((chunk) => {
         let text = chunk.toString();
         text = text.split('').map(char => {
             char = char.toLowerCase()
